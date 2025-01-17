@@ -7,7 +7,6 @@ import { startJourney } from '../commands/startJourney.js';
 import { quickCommit } from '../commands/quickCommit.js';
 import { startRepo } from '../commands/startRepo.js';
 import { handlePR } from '../commands/pullRequest.js';
-import { manageRepo } from '../commands/manageRepo.js';
 
 
 export async function interactiveMode() {
@@ -56,8 +55,8 @@ export async function interactiveMode() {
       await startRepo();
       break;
     case 'Manage Repository':
-        await manageRepo({});
-        break;
+      console.log("Coming Soon");
+      break;
     case 'Manage Pull Requests':
       await handlePR({});
       break;
