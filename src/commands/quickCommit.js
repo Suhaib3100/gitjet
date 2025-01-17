@@ -22,11 +22,31 @@ export async function quickCommit({ message }) {
     spinner.text = 'Adding changes...';
     await git.add('.');
 
-    // Generate advanced commit message
+    // Get detailed changes (modified, added, deleted files)
     const stagedFiles = status.staged;
-    const fileList = stagedFiles.length
-      ? `Files changed: ${stagedFiles.join(', ')}`
-      : 'No specific file changes detected';
+    const modifiedFiles = stagedFiles.filter(file => file.index === 'M');
+    const addedFiles = stagedFiles.filter(file => file.index === 'A');
+    const deletedFiles = stagedFiles.filter(file => file.index === 'D');
+
+    // Generate detailed commit message based on file changes
+    let fileList = '';
+    
+    if (modifiedFiles.length) {
+      fileList += `Modified: ${modifiedFiles.map(file => file.path).join(', ')}`;
+    }
+
+    if (addedFiles.length) {
+      if (fileList) fileList += ', ';
+      fileList += `Added: ${addedFiles.map(file => file.path).join(', ')}`;
+    }
+
+    if (deletedFiles.length) {
+      if (fileList) fileList += ', ';
+      fileList += `Deleted: ${deletedFiles.map(file => file.path).join(', ')}`;
+    }
+
+    fileList = fileList || 'No specific file changes detected';
+
     const commitMessage = message
       ? `${message} (${fileList})`
       : `Quick commit (${fileList})`;
