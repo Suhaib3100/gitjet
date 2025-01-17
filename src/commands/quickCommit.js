@@ -7,7 +7,7 @@ export async function quickCommit({ message }) {
   const spinner = ora('Processing quick commit...').start();
 
   try {
-    // Check if we're in a git repository
+    // Check if we're in a Git repository
     const isRepo = await git.checkIsRepo();
     if (!isRepo) {
       spinner.fail(chalk.red('Not a git repository!'));
@@ -23,9 +23,17 @@ export async function quickCommit({ message }) {
     const commitMessage = message || 'Quick commit via GitJet';
     await git.commit(commitMessage);
 
-    // Push changes
-    spinner.text = 'Pushing changes...';
-    await git.push();
+    // Check if the branch has an upstream set
+    const status = await git.status();
+    if (!status.tracking) {
+      spinner.text = 'Setting upstream branch...';
+      const branch = status.current;
+      await git.push(['--set-upstream', 'origin', branch]);
+    } else {
+      // Push changes
+      spinner.text = 'Pushing changes...';
+      await git.push();
+    }
 
     spinner.succeed(chalk.green('Changes successfully committed and pushed!'));
   } catch (error) {
