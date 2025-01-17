@@ -7,6 +7,7 @@ import { startJourney } from '../commands/startJourney.js';
 import { quickCommit } from '../commands/quickCommit.js';
 import { startRepo } from '../commands/startRepo.js';
 import { handlePR } from '../commands/pullRequest.js';
+import { manageRepo } from '../commands/manageRepo.js';
 
 
 export async function interactiveMode() {
@@ -17,7 +18,7 @@ export async function interactiveMode() {
       message: chalk.blue(`${figures.pointer} What would you like to do?`),
       choices: [
         {
-          name: chalk.green(`${figures.star} Start Your Git Journey (Initialise Repository)`),
+          name: chalk.green(`${figures.star} Start Your Git Journey (Initialize Repository)`),
           value: 'Start Journey'
         },
         {
@@ -25,11 +26,11 @@ export async function interactiveMode() {
           value: 'Quick Commit'
         },
         {
-          name: `${chalk.green('🔧 Manage Repository')}`,
+          name: chalk.cyan(`${figures.triangleRight} Manage Repository`),
           value: 'Manage Repository',
-        },        
+        },
         {
-          name: chalk.magenta(`${figures.triangleRight} Manage Pull Requests`),
+          name: chalk.magenta(`${figures.triangleUp} Manage Pull Requests`),
           value: 'Manage Pull Requests'
         },
         {
@@ -40,7 +41,7 @@ export async function interactiveMode() {
           name: chalk.red(`${figures.cross} Exit`),
           value: 'Exit'
         }
-      ]
+      ],
     }
   ]);
 
@@ -54,6 +55,9 @@ export async function interactiveMode() {
     case 'Initialize Repository':
       await startRepo();
       break;
+    case 'Manage Repository':
+        await manageRepo({});
+        break;
     case 'Manage Pull Requests':
       await handlePR({});
       break;
