@@ -16,16 +16,12 @@ export async function interactiveMode() {
       message: chalk.blue(`${figures.pointer} What would you like to do?`),
       choices: [
         {
-          name: chalk.green(`${figures.star} Start Your Git Journey (Beginner Friendly)`),
+          name: chalk.green(`${figures.star} Start Your Git Journey (Initialise Repository)`),
           value: 'Start Journey'
         },
         {
           name: chalk.yellow(`${figures.play} Quick Commit`),
           value: 'Quick Commit'
-        },
-        {
-          name: chalk.cyan(`${figures.circle} Initialize Repository`),
-          value: 'Initialize Repository'
         },
         {
           name: chalk.magenta(`${figures.triangleRight} Manage Pull Requests`),
