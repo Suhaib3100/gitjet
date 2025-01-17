@@ -22,6 +22,9 @@ export async function quickCommit({ message }) {
     spinner.text = 'Adding changes...';
     await git.add('.');
 
+    // Log status for debugging (check the staged files)
+    console.log('Staged files:', status.staged);
+
     // Get detailed changes (modified, added, deleted files)
     const stagedFiles = status.staged;
     const modifiedFiles = stagedFiles.filter(file => file.index === 'M');
