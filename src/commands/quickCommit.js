@@ -14,21 +14,31 @@ export async function quickCommit({ message }) {
       return;
     }
 
+    // Get the current branch
+    const status = await git.status();
+    const currentBranch = status.current;
+
     // Add all changes
     spinner.text = 'Adding changes...';
     await git.add('.');
 
+    // Generate advanced commit message
+    const stagedFiles = status.staged;
+    const fileList = stagedFiles.length
+      ? `Files changed: ${stagedFiles.join(', ')}`
+      : 'No specific file changes detected';
+    const commitMessage = message
+      ? `${message} (${fileList})`
+      : `Quick commit (${fileList})`;
+
     // Commit changes
     spinner.text = 'Committing changes...';
-    const commitMessage = message || 'Quick commit via GitJet';
     await git.commit(commitMessage);
 
     // Check if the branch has an upstream set
-    const status = await git.status();
     if (!status.tracking) {
       spinner.text = 'Setting upstream branch...';
-      const branch = status.current;
-      await git.push(['--set-upstream', 'origin', branch]);
+      await git.push(['--set-upstream', 'origin', currentBranch]);
     } else {
       // Push changes
       spinner.text = 'Pushing changes...';
