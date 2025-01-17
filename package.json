@@ -1,7 +1,7 @@
 {
   "name": "gitjet",
   "version": "1.0.1",
-  "description": "A cutting-edge CLI tool for simplified Git and GitHub workflows",
+  "description": "A cutting-edge CLI tool for streamlined Git and GitHub workflows with interactive UI options for developers",
   "main": "src/index.js",
   "type": "module",
   "bin": {
@@ -19,7 +19,13 @@
     "github",
     "cli",
     "workflow",
-    "developer-tools"
+    "developer-tools",
+    "git-automation",
+    "git-utility",
+    "interactive-cli",
+    "commit-automation",
+    "git-pr",
+    "gitjet"
   ],
   "author": "Suhaib",
   "license": "MIT",
