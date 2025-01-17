@@ -8,6 +8,7 @@ import { quickCommit } from '../commands/quickCommit.js';
 import { startRepo } from '../commands/startRepo.js';
 import { handlePR } from '../commands/pullRequest.js';
 
+
 export async function interactiveMode() {
   const { action } = await inquirer.prompt([
     {
@@ -23,6 +24,10 @@ export async function interactiveMode() {
           name: chalk.yellow(`${figures.play} Quick Commit`),
           value: 'Quick Commit'
         },
+        {
+          name: `${chalk.green('🔧 Manage Repository')}`,
+          value: 'Manage Repository',
+        },        
         {
           name: chalk.magenta(`${figures.triangleRight} Manage Pull Requests`),
           value: 'Manage Pull Requests'
