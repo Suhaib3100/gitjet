@@ -149,3 +149,6 @@ Changes successfully committed and pushed!
 ---
 
 Enjoy using **GitJet** and simplify your Git workflow with style! 🚀
+
+
+Updated: 14/2/2025
