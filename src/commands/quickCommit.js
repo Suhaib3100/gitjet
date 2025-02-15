@@ -1,6 +1,7 @@
 import simpleGit from 'simple-git';
 import chalk from 'chalk';
 import ora from 'ora';
+import inquirer from 'inquirer';
 
 export async function quickCommit({ message }) {
   const git = simpleGit();
@@ -50,9 +51,21 @@ export async function quickCommit({ message }) {
 
     fileList = fileList || 'No specific file changes detected';
 
-    const commitMessage = message
-      ? `${message} (${fileList})`
-      : `Quick commit (${fileList})`;
+    // If no commit message is provided, prompt the user for one
+    let commitMessage = message;
+
+    if (!commitMessage) {
+      const answers = await inquirer.prompt([
+        {
+          type: 'input',
+          name: 'customMessage',
+          message: 'Enter a commit message:',
+          default: `Quick commit (${fileList})`,
+        },
+      ]);
+
+      commitMessage = answers.customMessage;
+    }
 
     // Commit changes
     spinner.text = 'Committing changes...';

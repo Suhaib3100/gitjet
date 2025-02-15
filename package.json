@@ -1,6 +1,6 @@
 {
   "name": "gitjet",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A cutting-edge CLI tool for streamlined Git and GitHub workflows with interactive UI options for developers",
   "main": "src/index.js",
   "type": "module",
@@ -38,7 +38,7 @@
     "cross-spawn": "^7.0.3",
     "figures": "^6.1.0",
     "ink": "^4.4.1",
-    "inquirer": "^9.2.12",
+    "inquirer": "^9.3.7",
     "ora": "^7.0.1",
     "react": "^18.2.0",
     "simple-git": "^3.21.0",
